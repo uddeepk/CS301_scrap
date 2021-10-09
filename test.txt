@@ -1,0 +1,5 @@
+set a 2
+set b 3
+set c a
+eq a b
+add c b
