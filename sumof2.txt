@@ -1,0 +1,8 @@
+set b 1
+set a 0
+set c 0
+add a b
+bsl b 1
+add c 1
+leq c 5
+jump 3

@@ -10,7 +10,7 @@
 #ifndef FILE_MYINSTRUCTION_H_INCLUDED
 #define FILE_MYINSTRUCTION_H_INCLUDED
 
-// #include "myopset.h" // For MyOpset
+
 #include <map>
 using std::map;
 #include <memory>
@@ -69,7 +69,28 @@ public:
 	    jump();
 	else if(_opcode == "eq")
 	    eq();
-	
+	else if(_opcode == "neq")
+	    neq();
+	else if(_opcode == "geq")
+	    geq();
+	else if(_opcode == "leq")
+	    leq();
+	else if(_opcode == "less")
+	    less();
+	else if(_opcode == "grtr")
+	    grtr();
+	else if(_opcode == "bsl")
+	    bsl();
+	else if(_opcode == "bsr")
+	    bsr();
+	else if(_opcode == "band")
+	    band();
+	else if(_opcode == "bor")
+	    bor();
+	else if(_opcode == "bxor")
+	    bxor();
+	else if(_opcode == "bnot")
+	    bnot();
     }
 	    
  
@@ -96,7 +117,7 @@ private:
 	*_operand1 *= *_operand2;
     }
     void jump() {
-        *((*_regs)['j'])=*_operand1;
+        *((*_regs)['j'])=*_operand1-1;
     }
     void div() {
         *_operand1 /= *_operand2;
@@ -105,7 +126,44 @@ private:
         if (*_operand1 != *_operand2)
             ++(*((*_regs)['j']));
     }
-	
+    void neq () {
+        if (*_operand1 == *_operand2)
+            ++(*((*_regs)['j']));
+    }
+    void geq () {
+        if (!(*_operand1 >= *_operand2))
+            ++(*((*_regs)['j']));
+    }
+    void leq () {
+        if (!(*_operand1 <= *_operand2))
+            ++(*((*_regs)['j']));
+    }
+    void less() {
+       if (!(*_operand1 < *_operand2))
+            ++(*((*_regs)['j']));
+    }
+    void grtr() {
+       if (!(*_operand1 > *_operand2))
+            ++(*((*_regs)['j']));
+    }
+    void bsl() {
+        *_operand1 = *_operand1 << *_operand2;
+    }
+    void bsr() {
+        *_operand1 = *_operand1 >> *_operand2;
+    }
+    void band() {
+        *_operand1 = *_operand1 & *_operand2;
+    }
+    void bor() {
+        *_operand1 = *_operand1 | *_operand2;
+    }
+    void bxor() {
+        *_operand1 = *_operand1 ^ *_operand2;
+    }
+    void bnot() {
+        *_operand1 = ~*_operand1;
+    }
 };
 
 
